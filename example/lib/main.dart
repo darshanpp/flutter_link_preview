@@ -74,7 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
     _controller = TextEditingController(
         text:
             "https://www.bilibili.com/video/BV1F64y1c7hd?spm_id_from=333.851.b_7265706f7274466972737431.12");
+    
+    
+    getPreviewData();
     super.initState();
+  }
+
+  getPreviewData() async{
+    
+    try {
+      InfoBase demo = await LinkPreViewData().getLinkPreviewData(url: 'https://www.nytimes.com/2022/01/17/opinion/schwarzenegger-solar-power-california.html');
+      print('Demo $demo');
+    }  catch (e) {
+      print('asdjfldsjf ${e.toString()}');
+    }
   }
 
   @override

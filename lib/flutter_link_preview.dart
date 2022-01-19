@@ -130,3 +130,35 @@ class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
     );
   }
 }
+
+class LinkPreViewData{
+
+  String _url;
+  InfoBase _info;
+
+  Future<InfoBase> getLinkPreviewData({@required url,showMultimedia = true,useMultithread = false,cache = const Duration(hours: 24)}) async{
+    _url = url.trim();
+    if (_info == null)
+
+      try{
+        await _getInfo(showMultimedia: showMultimedia,useMultithread: useMultithread,cache: cache);
+      }catch(e){
+      print('Exception ${e.toString()}');
+      }
+
+    return _info;
+  }
+
+  Future<InfoBase> _getInfo({cache,showMultimedia = true,useMultithread = false,}) async {
+    if (_url.startsWith("http")) {
+      return await WebAnalyzer.getInfo(
+        _url,
+        cache: cache,
+        multimedia: showMultimedia,
+        useMultithread: useMultithread,
+      );
+    } else {
+      print("Links don't start with http or https from : $_url");
+    }
+  }
+}
