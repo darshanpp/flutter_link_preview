@@ -32,15 +32,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     _controller = TextEditingController(
         text:
-            "https://www.bilibili.com/video/BV1F64y1c7hd?spm_id_from=333.851.b_7265706f7274466972737431.12");
-    
-    
+        "https://www.bilibili.com/video/BV1F64y1c7hd?spm_id_from=333.851.b_7265706f7274466972737431.12");
+
+
     getPreviewData();
     super.initState();
   }
 
   getPreviewData() async{
-    
+
     try {
       var demo = await LinkPreViewData().getLinkPreviewData(url: 'https://www.youtube.com/watch?v=f9XQD5mf6FY');
 
@@ -69,29 +69,29 @@ class _MyHomePageState extends State<MyHomePage> {
               TextField(controller: _controller),
               Row(
                 children: <Widget>[
-                  RaisedButton(
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: const Text("get"),
-                  ),
+                  // RaisedButton(
+                  //   onPressed: () {
+                  //     setState(() {});
+                  //   },
+                  //   child: const Text("get"),
+                  // ),
                   const SizedBox(width: 15),
-                  RaisedButton(
-                    onPressed: () {
-                      _index++;
-                      if (_index >= _urls.length) _index = 0;
-                      _controller.text = _urls[_index];
-                      setState(() {});
-                    },
-                    child: const Text("next"),
-                  ),
+                  // RaisedButton(
+                  //   onPressed: () {
+                  //     _index++;
+                  //     if (_index >= _urls.length) _index = 0;
+                  //     _controller.text = _urls[_index];
+                  //     setState(() {});
+                  //   },
+                  //   child: const Text("next"),
+                  // ),
                   const SizedBox(width: 15),
-                  RaisedButton(
-                    onPressed: () {
-                      _controller.clear();
-                    },
-                    child: const Text("clear"),
-                  ),
+                  // RaisedButton(
+                  //   onPressed: () {
+                  //     _controller.clear();
+                  //   },
+                  //   child: const Text("clear"),
+                  // ),
                 ],
               ),
               const SizedBox(height: 15),

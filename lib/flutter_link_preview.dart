@@ -141,9 +141,9 @@ class LinkPreViewData{
     if (_info == null)
 
       try{
-      _info =  await _getInfo(showMultimedia: showMultimedia,useMultithread: useMultithread,cache: cache);
+        _info =  await _getInfo(showMultimedia: showMultimedia,useMultithread: useMultithread,cache: cache);
       }catch(e){
-      print('Exception ${e.toString()}');
+        print('Exception ${e.toString()}');
       }
 
     return _info;
