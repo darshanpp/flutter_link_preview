@@ -4,14 +4,17 @@ version: 1.5.6
 homepage: https://github.com/yungzhu/flutter_link_preview
 
 environment:
-    sdk: ">=2.7.0 <3.0.0"
+    sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
     flutter:
         sdk: flutter
-    http: ^0.13.3
-    html: ^0.15.0
-    gbk2utf8: ^1.0.1
+    http:
+    html:
+    gbk2utf8:
+        git:
+            url: https://github.com/Anilkumar18/gbk2utf8.git
+            ref: master
 
 dev_dependencies:
 
