@@ -15,8 +15,8 @@ part 'web_analyzer.dart';
 /// Link Preview Widget
 class FlutterLinkPreview extends StatefulWidget {
   const FlutterLinkPreview({
-    Key? key,
-    required this.url,
+    Key key,
+    @required this.url,
     this.cache = const Duration(hours: 24),
     this.builder,
     this.titleStyle,
@@ -32,13 +32,13 @@ class FlutterLinkPreview extends StatefulWidget {
   final Duration cache;
 
   /// Customized rendering methods
-  final Widget Function(InfoBase info)? builder;
+  final Widget Function(InfoBase info) builder;
 
   /// Title style
-  final TextStyle? titleStyle;
+  final TextStyle titleStyle;
 
   /// Content style
-  final TextStyle? bodyStyle;
+  final TextStyle bodyStyle;
 
   /// Show image or video
   final bool showMultimedia;
@@ -51,21 +51,21 @@ class FlutterLinkPreview extends StatefulWidget {
 }
 
 class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
-  String? _url;
-  InfoBase? _info;
+  String _url;
+  InfoBase _info;
 
   @override
   void initState() {
     _url = widget.url.trim();
-    _info = WebAnalyzer.getInfoFromCache(_url ?? '');
+    _info = WebAnalyzer.getInfoFromCache(_url);
     if (_info == null) _getInfo();
     super.initState();
   }
 
   Future<void> _getInfo() async {
-    if ((_url ?? '').startsWith("http")) {
+    if (_url.startsWith("http")) {
       _info = await WebAnalyzer.getInfo(
-        _url ?? '',
+        _url,
         cache: widget.cache,
         multimedia: widget.showMultimedia,
         useMultithread: widget.useMultithread,
@@ -79,20 +79,20 @@ class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
   @override
   Widget build(BuildContext context) {
     if (widget.builder != null) {
-      return widget.builder!(_info!);
+      return widget.builder(_info);
     }
 
     if (_info == null) return const SizedBox();
 
     if (_info is WebImageInfo) {
       return Image.network(
-        (_info as WebImageInfo).image ?? '',
+        (_info as WebImageInfo).image,
         fit: BoxFit.contain,
       );
     }
 
-    final WebInfo info = _info as WebInfo;
-    if (!WebAnalyzer.isNotEmpty(info.title ?? '')) return const SizedBox();
+    final WebInfo info = _info;
+    if (!WebAnalyzer.isNotEmpty(info.title)) return const SizedBox();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -109,7 +109,7 @@ class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                info.title ?? '',
+                info.title,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: widget.titleStyle,
@@ -117,10 +117,10 @@ class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
             ),
           ],
         ),
-        if (WebAnalyzer.isNotEmpty(info.description ?? '')) ...[
+        if (WebAnalyzer.isNotEmpty(info.description)) ...[
           const SizedBox(height: 8),
           Text(
-            info.description ?? '',
+            info.description,
             maxLines: 5,
             overflow: TextOverflow.ellipsis,
             style: widget.bodyStyle,
@@ -133,26 +133,26 @@ class _FlutterLinkPreviewState extends State<FlutterLinkPreview> {
 
 class LinkPreViewData{
 
-  String? _url;
-  InfoBase? _info;
+  String _url;
+  InfoBase _info;
 
-  Future<InfoBase?> getLinkPreviewData({@required url,showMultimedia = true,useMultithread = false,cache = const Duration(hours: 24)}) async{
+  Future<InfoBase> getLinkPreviewData({@required url,showMultimedia = true,useMultithread = false,cache = const Duration(hours: 24)}) async{
     _url = url.trim();
     if (_info == null)
 
       try{
-        _info =  await _getInfo(showMultimedia: showMultimedia,useMultithread: useMultithread,cache: cache);
+      _info =  await _getInfo(showMultimedia: showMultimedia,useMultithread: useMultithread,cache: cache);
       }catch(e){
-        print('Exception ${e.toString()}');
+      print('Exception ${e.toString()}');
       }
 
     return _info;
   }
 
-  Future<InfoBase?> _getInfo({cache,showMultimedia = true,useMultithread = false,}) async {
-    if ((_url ?? '').startsWith("http")) {
+  Future<InfoBase> _getInfo({cache,showMultimedia = true,useMultithread = false,}) async {
+    if (_url.startsWith("http")) {
       return await WebAnalyzer.getInfo(
-        _url ?? '',
+        _url,
         cache: cache,
         multimedia: showMultimedia,
         useMultithread: useMultithread,
