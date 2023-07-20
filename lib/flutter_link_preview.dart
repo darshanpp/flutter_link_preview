@@ -136,7 +136,7 @@ class LinkPreViewData{
   String? _url;
   InfoBase? _info;
 
-  Future<InfoBase?>? getLinkPreviewData({@required url,showMultimedia = true,useMultithread = false,cache = const Duration(hours: 24)}) async{
+  Future<InfoBase?> getLinkPreviewData({@required url,showMultimedia = true,useMultithread = false,cache = const Duration(hours: 24)}) async{
     _url = url.trim();
     if (_info == null)
 
