@@ -11,10 +11,11 @@ dependencies:
         sdk: flutter
     http:
     html:
-    gbk2utf8:
-        git:
-            url: https://github.com/Anilkumar18/gbk2utf8.git
-            ref: master
+    flutter_gbk2utf8: ^1.0.1
+#    gbk2utf8:
+#        git:
+#            url: https://github.com/Anilkumar18/gbk2utf8.git
+#            ref: master
 
 dev_dependencies:
 
